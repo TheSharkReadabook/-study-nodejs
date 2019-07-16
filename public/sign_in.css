@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+.sign_in_box{
+    padding:50px 30px;
+    background-color: #fdfdfd;
+    position:relative;
+    
+}
+
+.sign_in_box_sub{
+    text-align:center;
+    position: absolute;
+    margin:auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}

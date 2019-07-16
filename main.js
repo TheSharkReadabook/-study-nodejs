@@ -17,7 +17,7 @@ var app = http.createServer(function(request, response){
 
     
     if(_url == '/'){
-
+            
 
         response.writeHead(200);
         response.end('_index');
