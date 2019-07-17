@@ -14,10 +14,12 @@ var app = http.createServer(function(request, response){
 
     
     if(_url == '/'){
+        fs.readdir('./data',function(error, fileliust){
 
-
-        response.writeHead(200);
-        response.end('_index');
+            
+        });
+    
+        response.send('_index');
 
     }else if(_url == '/?id=sign_in'){
 
