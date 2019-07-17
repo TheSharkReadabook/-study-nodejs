@@ -2,13 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
-
 var path = require('path');
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
 var express =require('express');
-
-
 
 
 var app = http.createServer(function(request, response){
@@ -17,7 +14,7 @@ var app = http.createServer(function(request, response){
 
     
     if(_url == '/'){
-            
+
 
         response.writeHead(200);
         response.end('_index');

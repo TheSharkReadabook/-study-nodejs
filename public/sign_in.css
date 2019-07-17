@@ -11,7 +11,10 @@ html, body{
     padding:50px 30px;
     background-color: #fdfdfd;
     position:relative;
-    
+    position:absolute;
+    top:0; left:0; bottom:0; right:0;
+    height:20%;
+    margin:10% auto;
 }
 
 .sign_in_box_sub{
