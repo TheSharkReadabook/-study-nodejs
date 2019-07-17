@@ -6,3 +6,9 @@ html, body{
     height: 100%;
     width: 100%;
 }
+
+.plan_box{
+    margin: auto;
+    border:2px solid #3f4e6b;
+
+}
