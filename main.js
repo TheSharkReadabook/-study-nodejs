@@ -5,42 +5,29 @@ var qs = require('querystring');
 var path = require('path');
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
-var express =require('express');
+var express = require('express');
+var app = express();
 
+var dbconfig = require('./db_connect.js');
+var connection = mysql.createConnection(dbconfig);
 
-var app = http.createServer(function(request, response){
-    var _url = request.url;
+// app.use(express.static('public'));
 
+app.get('/', function (req, res) {
+    connection.connect();
 
-    
-    if(_url == '/'){
-        fs.readdir('./data',function(error, fileliust){
+    connection.query('SELECT view, tit, content FROM board', function(err, rows, fields) {
+    if (!err)
+        console.log('The solution is: ', rows);
+    else
+        console.log('Error while performing Query.', err);
+    });
 
-                            
-        });
-    
-        response.send('_index');
+    connection.end();
 
-    }else if(_url == '/?id=sign_in'){
-
-
-
-        response.writeHead(200);
-        response.end('success');
-    }
-    
-    
-    else{
-        response.writeHead(404);
-        response.end('failed');
-    }
-
-    
-
-
-
-    
+  res.send('Hello World!');
 });
 
-
-app.listen(3000);
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});

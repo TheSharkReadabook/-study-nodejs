@@ -1,0 +1,13 @@
+# CREATE DATABASE trip2u;
+
+USE trip2u
+
+CREATE TABLE board(
+    view int, 
+    tit varchar(255),
+    content varchar(1000)
+);
+
+INSERT INTO board(view, tit, content) VALUES (1,'hello world','hello world content');
+
+SELECT view, tit, content FROM board;
