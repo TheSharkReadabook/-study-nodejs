@@ -1,0 +1,27 @@
+<%
+    var mysql = require('mysql');
+    var express = require('express');
+    var app = express();
+
+    var dbconfig = require('./db_connect.js');
+    var db = mysql.createConnection(dbconfig);
+
+
+    db.connect();
+
+    db.query('SELECT view, tit, content FROM board', function(err, topics, fields) {
+
+
+    
+      res.send('Hello World!');
+    });
+    
+    app.listen(3000, function () {
+      console.log('Example app listening on port 3000!');
+    });
+
+    db.end();  
+    
+%>
+
+

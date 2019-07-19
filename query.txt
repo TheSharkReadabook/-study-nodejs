@@ -3,11 +3,14 @@
 USE trip2u
 
 CREATE TABLE board(
-    view int, 
+    view int PRIMARY KEY, 
     tit varchar(255),
     content varchar(1000)
 );
 
 INSERT INTO board(view, tit, content) VALUES (1,'hello world','hello world content');
+INSERT INTO board(view, tit, content) VALUES (2,'hello world2','hello world content2');
+INSERT INTO board(view, tit, content) VALUES (3,'hello world2','hello world content3');
+
 
 SELECT view, tit, content FROM board;

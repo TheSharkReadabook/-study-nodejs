@@ -9,21 +9,22 @@ var express = require('express');
 var app = express();
 
 var dbconfig = require('./db_connect.js');
-var connection = mysql.createConnection(dbconfig);
+var db = mysql.createConnection(dbconfig);
+db.connect();
 
 // app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-    connection.connect();
 
-    connection.query('SELECT view, tit, content FROM board', function(err, rows, fields) {
+    db.query('SELECT view, tit, content FROM board', function(err, topics, fields) {
     if (!err)
-        console.log('The solution is: ', rows);
-    else
+        console.log('The database result: ', topics);
+
+    else 
         console.log('Error while performing Query.', err);
     });
 
-    connection.end();
+    db.end();
 
   res.send('Hello World!');
 });
