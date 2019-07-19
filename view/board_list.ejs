@@ -1,7 +1,5 @@
 <%
     var mysql = require('mysql');
-    var express = require('express');
-    var app = express();
 
     var dbconfig = require('./db_connect.js');
     var db = mysql.createConnection(dbconfig);
@@ -15,6 +13,7 @@
 <html>
 <head>
     <title>trip to you</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./css/board_list.css">
 </head>
 <body>
