@@ -1,3 +1,4 @@
 npm install mysql --save
 npm install express --save
 npm install sanitize-html --save
+npm install ejs --save

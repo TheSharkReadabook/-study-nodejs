@@ -1,15 +1,4 @@
-<%
-    var mysql = require('mysql');
 
-    var dbconfig = require('./db_connect.js');
-    var db = mysql.createConnection(dbconfig);
-
-
-    db.connect();
-
-    db.query('SELECT view, tit, content FROM board', function(err, topics, fields) {
-
-%>
 <html>
 <head>
     <title>trip to you</title>
@@ -20,19 +9,19 @@
     <table>
         <tr>
             <th>글 번호</th>
-            <th>제목</th>
+            <th><%= title %></th>
             <th>글쓴이</th>
         </tr>
         
         <tr>
             <td>
-                <%=col_num%>
+             
             </td>
             <td>
-                <%=title%>
+               
             </td>
             <td>
-                <%=writer%>
+           
             </td>
         </tr>
     </table>
@@ -40,18 +29,4 @@
 </body>
 
 </html>
-
-<%
-    
-      res.send('Hello World!');
-    });
-    
-    app.listen(3000, function () {
-      console.log('Example app listening on port 3000!');
-    });
-
-    db.end();  
-    
-%>
-
 

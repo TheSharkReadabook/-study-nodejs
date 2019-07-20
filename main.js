@@ -8,18 +8,20 @@ var sanitizeHtml = require('sanitize-html');
 var express = require('express');
 var app = express();
 
-// var dbconfig = require('./db_connect.js');
-// var db = mysql.createConnection(dbconfig);
-// db.connect();
+app.set('view engine','ejs');  // view engine으로 ejs를 사용하겠다는 의미
 
-app.use(express.static('public'));
-
-app.set('view engine','ejs');
 app.set('views','./views');
 
 app.get('/',function(req,res){
-  res.render('view');
+  res.render('board_list', {title: 'hello'});
 });
+
+    // var dbconfig = require('./db_connect.js');
+    // var db = mysql.createConnection(dbconfig);
+    // db.connect();
+
+    // app.use(express.static('public'));
+
 
     // db.query('SELECT view, tit, content FROM board', function(err, topics, fields) {
     // if (!err)
