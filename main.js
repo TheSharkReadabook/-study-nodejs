@@ -16,6 +16,7 @@ app.get('/',function(req,res){
   res.render('board_list', {title: 'hello'});
 });
 
+
     // var dbconfig = require('./db_connect.js');
     // var db = mysql.createConnection(dbconfig);
     // db.connect();
