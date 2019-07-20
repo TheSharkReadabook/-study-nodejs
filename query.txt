@@ -3,14 +3,15 @@
 USE trip2u
 
 CREATE TABLE board(
-    view int PRIMARY KEY, 
+    num int PRIMARY KEY NOT NULL, 
     tit varchar(255),
+    writer varchar(20),
     content varchar(1000)
 );
 
-INSERT INTO board(view, tit, content) VALUES (1,'hello world','hello world content');
-INSERT INTO board(view, tit, content) VALUES (2,'hello world2','hello world content2');
-INSERT INTO board(view, tit, content) VALUES (3,'hello world2','hello world content3');
+INSERT INTO board(num, tit, writer, content) VALUES (1,'hello world1','sopia','hello world content');
+INSERT INTO board(num, tit, writer, content) VALUES (2,'hello world2','harry','hello world content2');
+INSERT INTO board(num, tit, writer, content) VALUES (3,'hello world2','croft','hello world content3');
 
 
-SELECT view, tit, content FROM board;
+SELECT num, tit, writer, content FROM board;
