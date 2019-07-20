@@ -18,7 +18,6 @@ app.set('view engine','ejs');  // view engine으로 ejs를 사용하겠다는 �
 app.set('views','./views'); //views folder
 
 db.connect();
-    
 
     db.query('SELECT num, tit, writer, content FROM board;', function(err, board_list_result, fields) {
       if (!err){
