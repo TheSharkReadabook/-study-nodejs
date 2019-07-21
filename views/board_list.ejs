@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <title>trip to you</title>
@@ -6,27 +5,33 @@
     <link rel="stylesheet" type="text/css" href="./css/board_list.css">
 </head>
 <body>
-    <table>
+    <table border='1'>
         <tr>
             <th>글 번호</th>
             <th>글 제목</th>
             <th>글쓴이</th>
         </tr>
-        
+<%
+    while(i < board_list_result.length){
+%>
         <tr>
             <td>
-                <%= col_num%>
+                <%=board_list_result[i].num%>
             </td>
             <td>
-                <%= title%>
+                <%=board_list_result[i].tit%>
             </td>
             <td>
-                <%= title%>
+                <%=board_list_result[i].writer%>
             </td>
         </tr>
+<%
+        i++;
+    }
+
+%>        
     </table>
 
 </body>
 
 </html>
-

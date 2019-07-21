@@ -6,42 +6,51 @@ var path = require('path');
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var app = express();
+
 var dbconfig = require('./db_connect.js');
-
 var db = mysql.createConnection(dbconfig);
-
-
-//  app.use(express.static('public')); // show static files
-
-app.set('view engine','ejs');  // view engine으로 ejs를 사용하겠다는 의미
-app.set('views','./views'); //views folder
 
 db.connect();
 
-    db.query('SELECT num, tit, writer, content FROM board;', function(err, board_list_result, fields) {
-      if (!err){
-          console.log('The database result: ', board_list_result);
-          // console.log('filelds : ',fields);          
-      }
-      else {
-          console.log('Error while performing Query.', err);
-      }
-
-    });
-
- 
-
-
-app.get('/',function(req,res){
-  res.render('index');
+db.once("open", function(){
+  console.log("db connted");
+});
+db.on("error", function(err){
+  console.log("db error", err);
 });
 
-app.get('/board_list',function(req,res){
-  res.render('board_list', {title: 'hello'});
+// app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+
+
+
+var postSchema = mysql.Schema({
+  num: {type:String, require:true},
+  tit: {type:String, require:true},
+  writer: {type:String, require:true}
 });
-    
-db.end();
+
+app.get('/posts', function(req, res){
+  Post.find({}, function(err, posts){
+    if(err) return res.json({success:false, message:err});
+    res.json({success:true, data:posts});
+  });
+});
+
+app.get('/posts', function(req, res){
+  Post.create(req.body.post, function(err, post){
+    if(err) return res.json({success:false, message:err});
+    res.json({success:true, data:post});
+  });
+});
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

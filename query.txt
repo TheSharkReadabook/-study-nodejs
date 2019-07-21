@@ -15,3 +15,6 @@ INSERT INTO board(num, tit, writer, content) VALUES (3,'hello world2','croft','h
 
 
 SELECT num, tit, writer, content FROM board;
+
+# have to add write day, time
+
