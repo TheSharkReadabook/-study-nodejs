@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var member = require('./routes/member');
-var member = require('./routes/board');
+var board = require('./routes/board');
 
 
 app.use('/member', member);

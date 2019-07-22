@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>trip to you</title>
+    <title><%=title%></title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./css/board_list.css">
 </head>
@@ -11,25 +11,27 @@
             <th>글 제목</th>
             <th>글쓴이</th>
         </tr>
+
+
 <%
-    while(i < board_list_result.length){
+    for(var i = 0; i<rows.length; i++){
 %>
         <tr>
             <td>
-                <%=board_list_result[i].num%>
+                <%=rows[i].num%>
             </td>
             <td>
-                <%=board_list_result[i].tit%>
+                <%=rows[i].tit%>
             </td>
             <td>
-                <%=board_list_result[i].writer%>
+                <%=rows[i].writer%>
             </td>
         </tr>
 <%
-        i++;
+
     }
 
-%>        
+%>
     </table>
 
 </body>
