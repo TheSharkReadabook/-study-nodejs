@@ -10,18 +10,34 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var dbconfig = require('./db_connect.js');
-var db = mysql.createConnection(dbconfig);
-
-db.connect();
- 
+var member = require('./routes/member');
+var member = require('./routes/board');
 
 
-// app.set('views', path.join(__dirname, 'views'));
+app.use('/member', member);
+app.use('/board', board);
+
+
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
 
-app.use(express.static(path.join(__dirname, "public")));
+
+// var dbconfig = require('./db_connect.js');
+// var db = mysql.createConnection(dbconfig);
+
+// db.connect();
+ 
+
+// app.use(express.static(path.join(__dirname, "public")));
+
+// db.query('SELECT num, tit, writer, content FROM board',
+// function (error, results, fields) {
+//   if (error) throw error;
+
+//   console.log('The solution is: ', results[0].num);
+// });
+// db.end(); 
 
 
 
