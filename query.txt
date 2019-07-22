@@ -3,18 +3,39 @@
 USE trip2u
 
 CREATE TABLE board(
-    num int PRIMARY KEY NOT NULL, 
-    tit varchar(255),
-    writer varchar(20),
+    `idx` int PRIMARY KEY NOT NULL, 
+    `tit` varchar(255),
+    `writer` varchar(20),
+    `hit` int,
     content varchar(1000)
 );
 
-INSERT INTO board(num, tit, writer, content) VALUES (1,'hello world1','sopia','hello world content');
-INSERT INTO board(num, tit, writer, content) VALUES (2,'hello world2','harry','hello world content2');
-INSERT INTO board(num, tit, writer, content) VALUES (3,'hello world2','croft','hello world content3');
+INSERT INTO board(idx, tit, writer, content) VALUES (1,'hello world1','sopia','hello world content');
+INSERT INTO board(idx, tit, writer, content) VALUES (2,'hello world2','harry','hello world content2');
+INSERT INTO board(idx, tit, writer, content) VALUES (3,'hello world2','croft','hello world content3');
 
 
-SELECT num, tit, writer, content FROM board;
+SELECT idx, tit, writer, content FROM board;
 
 # have to add write day, time
+
+
+CREATE TABLE `board` (
+  `idx` INT(12) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(50) NOT NULL COMMENT '',
+  `writer` VARCHAR(50) NOT NULL COMMENT '',
+  `content` MEDIUMTEXT NULL COMMENT '',
+  `hit` INT(10) NOT NULL DEFAULT 0 COMMENT '',
+  `regdate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `moddate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `password` VARCHAR(50) NULL COMMENT '',
+  PRIMARY KEY (`idx`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+INSERT INTO `board` (`title`, `writer`, `content`,`password`) VALUES
+	('첫번째 글', 'abcd01', '첫번째 글 내용', '1111'),
+	('두번째 글', 'abcd02', '두번째 글 내용', '2222'),
+  ('세번째 글', 'abcd03', '세번째 글 내용', '3333');
 

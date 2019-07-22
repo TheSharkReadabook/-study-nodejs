@@ -14,13 +14,48 @@ connection.connect();
 
 
 router.get('/', function(req, res, next) {
-  connection.query('SELECT num, tit, writer, content FROM board;', function(err, rows, fields) {
+  connection.query('SELECT idx,title,writer,hit,DATE_FORMAT(moddate, "%Y/%m/%d %T") AS moddate FROM board', function(err, rows, fields) {
     if (err) throw err;
-    res.render('board/board_list', {title: 'hello', rows:rows});
+    res.render('board/list', {title: 'hello', rows:rows});
   });
  
  });
  
+ 
+ router.get('/read/:idx', function(req, res, next){
+   var idx = req.params.idx;
+   console.log("idx : "+idx);
+   connection.beginTransaction(function(err){
+     if(err) console.log(err);
+     connection.query('UPDATE board SET hit=hit+1 WHERE idx=?', [idx], function(err){
+       if(err){
+         /* when error occured cancle query job and rollback*/
+         console.log(err);
+         connection.rollback(function(){
+           console.error('rollback error1');
+         })
+       }
+       connection.query('SELECT idx, title, content, writer, hit, DATE_FORMAT(moddate, "%Y/%m/%d %T")'+
+       'AS moddate, DATE_FORMAT(regdate, "%Y-%m-%d %T") AS regdate FROM board WHERE idx=?',[idx], function(err,rows){
+        
+        if(err){
+          console.log(err);
+          connection.rollback(function(){
+            console.error('rollback error2');
+          })
+        }
+        else {
+          connection.commit(function(err){
+            if(err) console.log(err);
+            console.log("row :"+rows);
+            res.render('read', {title:rows[0].title, rows:rows});
+          })
+        }
+        
+       });
+     })
+   })
+ });
 
 
 module.exports = router;

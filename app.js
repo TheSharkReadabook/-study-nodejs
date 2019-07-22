@@ -16,9 +16,11 @@ var board = require('./routes/board');
 
 
 
+
 app.use('/', index);
 app.use('/member', member);
 app.use('/board', board);
+
 
 
 app.set('views', path.join(__dirname, 'views'));
