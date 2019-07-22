@@ -14,6 +14,7 @@ var dbconfig = require('./db_connect.js');
 var db = mysql.createConnection(dbconfig);
 
 db.connect();
+ 
 
 
 // app.set('views', path.join(__dirname, 'views'));
