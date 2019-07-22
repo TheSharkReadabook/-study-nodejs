@@ -10,10 +10,12 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+// var index = require('./routes/index');
 var member = require('./routes/member');
 var board = require('./routes/board');
 
 
+// app.use('/', index);
 app.use('/member', member);
 app.use('/board', board);
 
