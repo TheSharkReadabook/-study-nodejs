@@ -28,10 +28,11 @@ router.get('/board_list',function (req,res,next) {
 })
 router.get('/board/board_list', function(req, res, next) {
 
-  var query = connection.query('SELECT num, tit, writer, content FROM board',function(err,rows){
+  var query = connection.query('SELECT num, tit, writer, content FROM board',
+  function(err,rows){
     if(err) console.log(err)        // 만약 에러값이 존재한다면 로그에 표시합니다.
     console.log('rows :' +  rows);
-    res.render('board_list', { title:'Board List',rows: rows }); // view 디렉토리에 있는 list 파일로 이동합니다.
+    res.render('board_list', { title:'Board List',rows: rows }); 
   });
 });
 
