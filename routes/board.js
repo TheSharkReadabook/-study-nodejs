@@ -68,44 +68,45 @@ router.get('/', function(req, res, next) {
  
 
  router.get('/write', function(req, res, next){
-   res.render('/writer', {title: 'write page'})
+   res.render('board/write', {title: 'write page'})
  });
 
-
- router.post('/write', function(req, res, next){
-  var body= req.body;
-  var writer = req.body.tit;
+ router.post('/write',function (req,res,next) {
+  var body = req.body;
+  var writer = req.body.writer;
+  var title = req.body.title;
   var content = req.body.content;
   var password = req.body.password;
-  connection.beginTransaction(function(err){
+  connection.beginTransaction(function(err) {
     if(err) console.log(err);
-    connection.query('INSERT INTO board(title, writer, content, passowrd) VALUES(?,?,?,?)',
-    [title, writer, content, password],
-    function(err){
-      if(err){
-        console.log(err);
-        connection.rollback(function(){
-          console.err('rollback error1');
-        })
-      }
-      connection.query('SELECT LAST_INSERT_ID AS idx', function(err, rows){
-        if(err){
-          console.log(err);
-          connection.rollback(function(){
-            console.error('rolback error1');
+    connection.query('INSERT INTO board(title,writer,content,password) VALUES(?,?,?,?)'
+        ,[title,writer,content,password]
+        ,function (err) {
+          if(err) {
+            console.log(err);
+            connection.rollback(function () {
+              console.error('rollback error1');
+            })
+          }
+          connection.query('SELECT LAST_INSERT_ID() as idx',function (err,rows) {
+            if(err) {
+              console.log(err);
+              connection.rollback(function () {
+                console.error('rollback error1');
+              })
+            }
+            else
+            {
+              connection.commit(function (err) {
+                if(err) console.log(err);
+                console.log("row : " + rows);
+                var idx = rows[0].idx;
+                res.redirect('/board/read/'+idx);
+              })
+            }
           })
-        }
-        else{
-          connection.commit(function(err){
-            if(err) console.log(err);
-            console.log("row : " + rows);
-            var idx = rows[0].idx;
-            res.redirect('/board/read/'+idx);
-          })
-        }
-      })
-    }
+    })
   })
- })
+})
 
 module.exports = router;
