@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form method="post" action="/board/write" onsubmit="onWriteSubmit()">
+      <table border="2">
+        <tr>
+          <th>제목</th>
+          <td><input type="text" name="title" id="title" required /></td>
+        </tr>
+        <tr>
+          <th>글쓴이</th>
+          <td><input type="text" name="writer" id="writer" required/></td>
+        </tr>
+        <tr>
+          <th>비밀번호</th>
+          <td><input type="password" name="password" id="password" required/></td>
+        </tr>
+        <tr>
+          <th>내용</th>
+          <td><textarea cols="50" role="12" name="content" id="content" required></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="등록"></td>
+        </tr>
+      </table>
+    </form>
+  <script>
+    function onWriteSubmit()
+    {
+      if ( $("#writer").val().trim() == "" )
+      {
+        var message = "아이디를 입력해 주세요";
+        $("#writer").val("");
+        $("#writer").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#title").val().trim() == "" )
+      {
+        var message = "제목을 입력해 주세요";
+        $("#title").val("");
+        $("#title").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#content").val().trim() == "" )
+      {
+        var message = "본문 내용을 입력해 주세요";
+        $("#content").val("");
+        $("#content").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#password").val().trim() == "" )
+      {
+        var message = "패스워드를 입력해 주세요";
+        $("#password").val("");
+        $("#password").focus();
+        alert(message);
+        return false;
+      }
+    }
+  </script>
+  </body>
+</html>

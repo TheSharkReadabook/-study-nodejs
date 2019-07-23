@@ -11,7 +11,16 @@ var connection = mysql.createConnection(dbconfig);
 
 connection.connect();
  
-
+// router.get('/list',function (req,res,next) {
+//   res.redirect('/board/1')
+// })
+// router.get('/list/:page', function(req, res, next) {
+//   var query = connection.query('SELECT idx,title,writer,hit,DATE_FORMAT(moddate, "%Y/%m/%d %T") AS moddate FROM board',function(err,rows){
+//     if(err) console.log(err)       
+//     console.log('rows :' +  rows);
+//     res.render('list', { title:'hello',rows: rows }); // view 디렉토리에 있는 list 파일로 이동합니다.
+//   });
+// });
 
 router.get('/', function(req, res, next) {
   connection.query('SELECT idx,title,writer,hit,DATE_FORMAT(moddate, "%Y/%m/%d %T") AS moddate FROM board', function(err, rows, fields) {
@@ -48,14 +57,55 @@ router.get('/', function(req, res, next) {
           connection.commit(function(err){
             if(err) console.log(err);
             console.log("row :"+rows);
-            res.render('read', {title:rows[0].title, rows:rows});
+            res.render('board/read', {title:rows[0].title, rows:rows});
           })
         }
         
        });
-     })
-   })
+     });
+   });
+ });
+ 
+
+ router.get('/write', function(req, res, next){
+   res.render('/writer', {title: 'write page'})
  });
 
+
+ router.post('/write', function(req, res, next){
+  var body= req.body;
+  var writer = req.body.tit;
+  var content = req.body.content;
+  var password = req.body.password;
+  connection.beginTransaction(function(err){
+    if(err) console.log(err);
+    connection.query('INSERT INTO board(title, writer, content, passowrd) VALUES(?,?,?,?)',
+    [title, writer, content, password],
+    function(err){
+      if(err){
+        console.log(err);
+        connection.rollback(function(){
+          console.err('rollback error1');
+        })
+      }
+      connection.query('SELECT LAST_INSERT_ID AS idx', function(err, rows){
+        if(err){
+          console.log(err);
+          connection.rollback(function(){
+            console.error('rolback error1');
+          })
+        }
+        else{
+          connection.commit(function(err){
+            if(err) console.log(err);
+            console.log("row : " + rows);
+            var idx = rows[0].idx;
+            res.redirect('/board/read/'+idx);
+          })
+        }
+      })
+    }
+  })
+ })
 
 module.exports = router;
