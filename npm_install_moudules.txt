@@ -2,9 +2,10 @@ npm install mysql --save
 npm install express --save
 npm install sanitize-html --save
 npm install ejs --save
-
+npm install body-parser --save
 
 npm install mysql -g
 npm install express -g
 npm install sanitize-html -g
 npm install ejs -g
+npm install body-parser --g 

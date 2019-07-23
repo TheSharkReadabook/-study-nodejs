@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql'); //mysql 모듈을 로딩.
+var bodyParser = require('body-parser');
 
+router.use(bodyParser.urlencoded({ extended: false }));
 /*
  로딩된 mysql 객체로부터 커넥션을 하나 생성합니다. 이때 실제적인 DB와의 연결은 이루어지지 않습니다.
  이후 query문이 실행될 때 이 커넥션을 통해 DB와 연결됩니다.
