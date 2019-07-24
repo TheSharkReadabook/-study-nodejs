@@ -111,45 +111,29 @@ router.get('/', function(req, res, next) {
 })
 
 
-router.get('/update:idx', function(req, res, next){
-  console.log('***update:idx***');
-  res.render('board/update');
-});
+router.get('/update/:idx', function(req, res, next){
+  var idx = req.params.idx;
+ //  console.log("idx : "+idx);
+  connection.beginTransaction(function(err){
+    if(err) console.log(err);
+      connection.query('SELECT idx, title, content, writer FROM board WHERE idx=?',[idx], function(err,rows){
+       if(err){
+         console.log(err);
+         connection.rollback(function(){
+           console.error('rollback error2');
+         })
+       }
+       else {
+         connection.commit(function(err){
+           if(err) console.log(err);
+           console.log("row :"+rows);
+           res.render('board/update', {title:rows[0].title, rows:rows});
+         })
+       }
+       
+      });
+    });
+  });
 
-router.post('/update:idx', function(req, res, next){
-  var body = req.body;
-  var idx = req.body.idx;
-  var title = req.body.title;
-  var writer = req.body.writer;
-  var content = req.body.content;
 
-  connection.query('UPDATE board SET title=?,writer=?,conten=? WHERE idx = ?'
-        ,[title,writer,content,idx]
-        ,function (err) {
-          if(err) {
-            console.log(err);
-            connection.rollback(function () {
-              console.error('rollback error1');
-            })
-          }
-          connection.query('SELECT LAST_INSERT_ID() as idx',function (err,rows) {
-            if(err) {
-              console.log(err);
-              connection.rollback(function () {
-                console.error('rollback error1');
-              })
-            }
-            else
-            {
-              connection.commit(function (err) {
-                if(err) console.log(err);
-                console.log("row : " + rows);
-                var idx = rows[0].idx;
-                res.redirect('/board/read/'+idx);
-              })
-            }
-          })
-    })
-
-})
 module.exports = router;
