@@ -123,46 +123,15 @@ router.get('/update/:idx', function(req, res, next){
            console.error('rollback error2');
          })
        }
+       else {
+        connection.commit(function(err){
+          if(err) console.log(err);
+          console.log("row :"+rows);
+          res.render('board/update', {title:rows[0].title, rows:rows});
+        })
+      }
       });
   });
-
- router.post('/update/:idx', function(req, res, next){
-  var body = req.body;
-  var idx = req.body.idx;
-  var writer = req.body.writer;
-  var title = req.body.title;
-  var content = req.body.content;
-  connection.beginTransaction(function(err){
-    if(err) console.log(err);
-    connection.query('UPDATE board SET title=?, writer=?, content=? WHERE idx=?')
-    ,[title, writer, content, idx]
-    ,function(err){
-      if(err){
-        console.log(err);
-        connection.error('rollback error1')
-      }
-    }
-    
-  })
-
- });
-  connection.query('SELECT LAST_INSERT_ID() as idx',function (err,rows) {
-    if(err) {
-      console.log(err);
-      connection.rollback(function () {
-        console.error('rollback error1');
-      })
-    }
-    else
-    {
-      connection.commit(function (err) {
-        if(err) console.log(err);
-        console.log("row : " + rows);
-        var idx = rows[0].idx;
-        res.redirect('/board/read/'+idx);
-      })
-    }
-  })
 });
 
 module.exports = router;
