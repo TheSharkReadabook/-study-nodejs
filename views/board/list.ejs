@@ -2,36 +2,49 @@
 <head>
     <title><%=title%></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="/css/board_list.css">
+    <link rel="stylesheet" type="text/css" href="/css/list.css">
 </head>
 <body>
-    <table border='1'>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>글쓴이</th>
-            <th>조회수</th>
-            <th>수정일</th>
-        </tr>
+    <% include ../tamplete/header.ejs %>
 
+    <div class='table_box'>
+        <table>
+            <thead>
+                <tr class='table_header'>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>글쓴이</th>
+                    <th>조회수</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
 
-<%
-    for(var i = 0; i<rows.length; i++){
-%>
-        <tr>
-            <td><%=rows[i].idx%></td>
-            <td><a href="/board/read/<%=rows[i].idx%>"><%=rows[i].title%></a></td>
-            <td><%=rows[i].writer%></td>
-            <td><%=rows[i].hit%></td>
-            <td><%=rows[i].moddate%></td>
-        </tr>
-<%
+            <%
+                for(var i = 0; i<rows.length; i++){
+            %>
+                <tr>
+                    
+                        <td><%=rows[i].idx%></td>
+                        <td><a href="/board/read/<%=rows[i].idx%>"><%=rows[i].title%></a></td>
+                        <td><%=rows[i].writer%></td>
+                        <td><%=rows[i].hit%></td>
+                        <td><%=rows[i].moddate%></td>
+                    
+                </tr>
+            <%
 
-    }
+                }
 
-%>
-    </table>
-    <a href="/board/write">글 쓰기</a>
+            %>
+            <tbody>
+
+        </table>
+        <div class='btn_write'> 
+            <a href="/board/write">글 쓰기</a>
+        </div>
+    </div>
+ 
 
 </body>
 

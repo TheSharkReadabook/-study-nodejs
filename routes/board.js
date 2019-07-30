@@ -4,26 +4,12 @@ var mysql = require('mysql'); //mysql 모듈을 로딩.
 var bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: false }));
-/*
- 로딩된 mysql 객체로부터 커넥션을 하나 생성합니다. 이때 실제적인 DB와의 연결은 이루어지지 않습니다.
- 이후 query문이 실행될 때 이 커넥션을 통해 DB와 연결됩니다.
- */
+
 var dbconfig = require('../db_connect.js');
 var connection = mysql.createConnection(dbconfig);
 
 connection.connect();
  
-// router.get('/list',function (req,res,next) {
-//   res.redirect('/board/1')
-// })
-// router.get('/list/:page', function(req, res, next) {
-//   var query = connection.query('SELECT idx,title,writer,hit,DATE_FORMAT(moddate, "%Y/%m/%d %T") AS moddate FROM board',function(err,rows){
-//     if(err) console.log(err)       
-//     console.log('rows :' +  rows);
-//     res.render('list', { title:'hello',rows: rows }); // view 디렉토리에 있는 list 파일로 이동합니다.
-//   });
-// });
-
 router.get('/', function(req, res, next) {
   connection.query('SELECT idx,title,writer,hit,DATE_FORMAT(moddate, "%Y/%m/%d %T") AS moddate FROM board', function(err, rows, fields) {
     if (err) throw err;
@@ -185,6 +171,8 @@ router.get('/delete/:idx', function(req, res, next){
       });
   });
 });
+
+
 
 module.exports = router;
 
