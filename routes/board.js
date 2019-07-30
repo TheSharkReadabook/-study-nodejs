@@ -120,7 +120,7 @@ router.get('/update/:idx', function(req, res, next){
        if(err){
          console.log(err);
          connection.rollback(function(){
-           console.error('rollback error2');
+           console.error('rollback error1');
          })
        }
        else {
@@ -163,5 +163,41 @@ router.post('/update',function (req,res,next) {
   })
 })
 
+router.get('/delete/:idx', function(req, res, next){
+  var idx = req.params.idx;
+  connection.beginTransaction(function(err){
+    if(err) console.log(err);
+      connection.query('DELETE FROM board WHERE idx = ? '
+      ,[idx]
+      , function(err,rows){
+       if(err){
+         console.log(err);
+         connection.rollback(function(){
+           console.error('rollback error1');
+         })
+       }
+       else {
+        connection.commit(function (err) {
+          if(err) console.log(err);
+          res.redirect('/board');
+        })
+          }
+      });
+  });
+});
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
