@@ -116,7 +116,7 @@ router.get('/update/:idx', function(req, res, next){
  //  console.log("idx : "+idx);
   connection.beginTransaction(function(err){
     if(err) console.log(err);
-      connection.query('SELECT idx, title, content, writer FROM board WHERE idx=?',[idx], function(err,rows){
+      connection.query('SELECT idx, title, writer, content FROM board WHERE idx=?',[idx], function(err,rows){
        if(err){
          console.log(err);
          connection.rollback(function(){
@@ -133,5 +133,35 @@ router.get('/update/:idx', function(req, res, next){
       });
   });
 });
+
+
+router.post('/update',function (req,res,next) {
+  var body = req.body;
+  var idx = req.body.idx;
+  var title = req.body.title;
+  var content = req.body.content;
+  var writer = req.body.writer;
+  connection.beginTransaction(function(err) {
+    if(err) console.log(err);
+    connection.query('UPDATE board SET title=?, content=?, writer=? WHERE idx = ? '
+        ,[title, content, writer, idx]
+        ,function (err) {
+          if(err) {
+            console.log(err);
+            connection.rollback(function () {
+              console.error('rollback error1');
+            })
+          }
+            else
+            {
+              connection.commit(function (err) {
+                if(err) console.log(err);
+                res.redirect('/board/read/'+idx);
+              })
+            }
+      })
+  })
+})
+
 
 module.exports = router;
