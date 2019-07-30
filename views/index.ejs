@@ -5,10 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
-    <div class='body'>
-
-        <% include ./tamplete/header.ejs %>
-
+    <% include ./tamplete/header.ejs %>
         <div class='txt_hello_box'>
             <div class='text_hello'>
                 Hello there, Create your plans!
@@ -19,8 +16,8 @@
 
         </div>
 
-        <div>
-            <div class='city_list_txt'>
+        <div class='city-list_tit_box'>
+            <div class='sub_tit'>
                 looking for city?
             </div>
 
@@ -94,17 +91,14 @@
                 </ul>
 
             </div>
-            <div>
-                <a href="#">more cities?</a>
+            <div class='sub_tit'>
+                    <a href="/board">do you looking for other travel storys?</a>
             </div>
-            <div>
-                <a href="/board">board_list</a>
-            </div>
+    
         </div>
 
 
-    </div>
-
+    <% include ./tamplete/footer.ejs %>
   
 </body>
 </html>

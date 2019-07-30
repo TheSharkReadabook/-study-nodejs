@@ -10,9 +10,7 @@ a{
     text-decoration: none;
     color:#000;
 }
-.body{
-    margin: 0 500px;
-}
+
 ul{
     list-style:none;
     padding-left:0px;
@@ -37,7 +35,7 @@ ul{
 }
 
 .txt_hello_box{
-    margin: 200px;
+    margin: 100px;
 
 }
 .text_hello{
@@ -52,7 +50,7 @@ ul{
     border:1px solid #e6e6e6;
     border-radius: 5px;
     padding: 10px;
-    margin: 200px 400px;
+    margin: 50px 550px;
 }
 
 .create_paln_btn:hover{
@@ -62,11 +60,15 @@ ul{
    
 }
 
+.city-list_tit_box{
+    margin: 0 250px;
+}
+
 .city_list_box{
     margin:100px 0 ;
 }
 
-.city_list_txt{
+.sub_tit{
     margin: 20px 0;
     font-size: 30px;
     padding: 15px;

@@ -23,31 +23,36 @@ table{
     border-collapse: collapse;
     width: 1000px;
     height: 300px;
-}
-td{
-    text-align: center;
-}
 
-.table_header {
-    background-color:#fcba03;
 }
-
 tbody tr:nth-child(2n) {
     background-color: #f2f2f2;
 }
 
 tbody tr:nth-child(2n):hover{
     background-color: #ebebeb;
-    translate: 0.5s;
+    transition: 0.5s;
 }
 
-  tbody tr:nth-child(2n+1) {
+tbody tr:nth-child(2n+1) {
     background-color: #ebebeb;
 }
 
 tbody tr:nth-child(2n+1):hover{
     background-color: #f2f2f2;
-    translate: 0.5s;
+    transition: 0.5s;
+}
+
+tbody{
+    border-radius: 30px;
+}
+td{
+    text-align: center;
+}
+
+
+.table_header {
+    background-color:#fcba03;
 }
 
 
