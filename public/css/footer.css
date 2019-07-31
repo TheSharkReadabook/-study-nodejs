@@ -11,4 +11,9 @@ html, body{
 footer{
     background-color:#3f4e6b;
     padding:100px;
+    position:absolute;
+    bottom:0;
+    width:50%;
+    height:70px;   
+
 }

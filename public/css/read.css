@@ -18,3 +18,32 @@ a{
     transform: translate(-50%, -50%);
     margin-top:100px;
 }
+
+.bg_box{
+  
+}
+.bg_shadow{
+    background-color:rgba(0, 0, 0, 0.5); /*살짝 투명한 검정으로 배경색*/
+    position: absolute;
+    
+}
+.tit_img{
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    position: absolute;
+  
+
+}
+
+.tit{
+    position: relative;
+    font-size: 100px;
+    font-weight: 150;
+    color:#fff;
+
+}

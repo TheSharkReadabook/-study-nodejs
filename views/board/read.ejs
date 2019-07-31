@@ -2,7 +2,7 @@
 <html>
 <head>
 <title><%= title %></title>
-<link rel='stylesheet' href='./css/read.css' />
+<link rel='stylesheet' href='/css/read.css' />
 </head>
 
 <%
@@ -10,38 +10,33 @@
 %>
 <% include ../tampletes/header.ejs %>
 <body>
+  <div class='bg_box'>
+    <div class='bg'></div>
+    <img src='/img/iu2.jpg' alt='iu2.jpg' class='tit_img'>
+  </div>
+
+
   <div class='board_box'>
-    <h1><%= title %></h1>
-    <table border="2">
-      <tr>
-        <th>번호</th>
-        <td><%=read.idx%></td>
-        <th>조회수</th>
-        <td><%=read.hit%></td>
-        <th>글쓴이</th>
-        <td><%=read.writer%></td>
-      </tr>
-      <tr>
-        <th>제목</th>
-        <td colspan="5"><%=read.title%></td>
-      </tr>
-      <tr>
-        <th>작성일</th>
-        <td colspan="2"><%=read.regdate%></td>
-        <th>수정일</th>
-        <td colspan="2"><%=read.moddate%></td>
-      </tr>
-      <tr>
-        <td colspan="6" height="400" ><%=read.content%></td>
-      </tr>
-      <tr>
-        <td colspan="6">
-          <a href="/board/"> 목록 </a>
-          <a href="/board/update/<%=read.idx%>">수정</a>
-          <a href="/board/delete/<%=read.idx%>"> 삭제 </a>
-        </td>
-      </tr>
-    </table>
+    
+    <div>
+      <div class='tit'>
+        <%=read.title%>
+      </div>
+    </div>
+    <div>
+      
+    </div>
+
+<!-- idx, hit, writer, title, regdate, moddate, content -->
+
+  <div>
+
+      <a href="/board/"> 목록 </a>
+      <a href="/board/update/<%=read.idx%>">수정</a>
+      <a href="/board/delete/<%=read.idx%>"> 삭제 </a>
+    
+  </div>
+
   </div>
   <% include ../tampletes/footer.ejs %>
 </body>
