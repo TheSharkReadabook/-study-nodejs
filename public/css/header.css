@@ -20,10 +20,14 @@ ul{
 }
 
 .header_logo{
-    margin-right: 70%;
+    margin-right: 65%;
 }
 
 .right_objects{
-    margin:15px 10px;
+    margin:15px 20px;
     right: 0;
+}
+
+.header_txt{
+    font-size:30px;
 }

@@ -10,18 +10,13 @@
 %>
 <% include ../tampletes/header.ejs %>
 <body>
-  <div class='bg_box'>
-    <div class='bg'></div>
-    <img src='/img/iu2.jpg' alt='iu2.jpg' class='tit_img'>
-  </div>
-
-
   <div class='board_box'>
-    
+
     <div>
       <div class='tit'>
         <%=read.title%>
       </div>
+
     </div>
     <div>
 
@@ -29,15 +24,20 @@
 
 <!-- idx, hit, writer, title, regdate, moddate, content -->
 
-  <div>
+    <div>
 
-      <a href="/board/"> 목록 </a>
-      <a href="/board/update/<%=read.idx%>">수정</a>
-      <a href="/board/delete/<%=read.idx%>">삭제 </a>
-    
-  </div>
+        <a href="/board/"> 목록 </a>
+        <a href="/board/update/<%=read.idx%>">수정</a>
+        <a href="/board/delete/<%=read.idx%>">삭제 </a>
+      
+    </div>
+
+    <div class='content'>
+
+      <%=read.content %>
+    </div>
 
   </div>
-  <% include ../tampletes/footer.ejs %>
+  <!-- <% include ../tampletes/footer.ejs %> -->
 </body>
 </html>
