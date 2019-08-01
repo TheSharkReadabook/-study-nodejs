@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql'); //mysql 모듈을 로딩.
+var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: false }));
