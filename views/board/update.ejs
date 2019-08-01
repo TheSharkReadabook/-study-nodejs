@@ -2,42 +2,39 @@
 <html xmlns="http://www.w3.org/1999/html">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/write.css' />
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form method="post" action="/board/update" onsubmit="onWriteSubmit()">
-      <table border="2">
-    
-        <%
-          for(var i = 0; i<rows.length; i++){
-        %>
-        <tr>
-            <td><input type="hidden" name="idx" value="<%=rows[i].idx%>"required/></td>
-        </tr>
-        <tr>
-          <th>제목</th>
-          <td><input type="text" name="title" id="title" value="<%=rows[i].title%>" required/></td>
-        </tr>
-        <tr>
-          <th>글쓴이</th>
-          <td><input type="text" name="writer" id="writer" value="<%=rows[i].writer%>" required/></td>
-        </tr>
-        <tr>
-          <th>내용</th>
-          <td><textarea cols="50" role="12" name="content" id="content" value="<%=rows[i].content%>" required></textarea></td>
-        </tr>
-        <tr>
-          <td colspan="2"><input type="submit" value="등록"></td>
-        </tr>
-        <%
 
-          }
+      <% include ../tampletes/header.ejs %>
+      <div class='form_box'>
+          <form method="post" action="/board/update" onsubmit="onWriteSubmit()">
+          <%
+            for(var i = 0; i<rows.length; i++){
+          %>
+          <div>
+            <input type="hidden" name="idx" value="<%=rows[i].idx%>"required/>
+          </div>       
+          <div>
+            <input type="text" name="title" id="title" value="<%=rows[i].title%>" required/>
+          </div>     
+          <div>
+            <input type="text" name="writer" id="writer" value="<%=rows[i].writer%>" required/>
+          </div>
+            <textarea cols="50" role="12" name="content" id="content" value="<%=rows[i].content%>" required></textarea>
+          <div class='btn_submit_box'>
 
-        %>
-      </table>
-    </form>
+          <%
+
+            }
+
+          %>
+            <input type="submit" value="submit!" class='btn_submit'>
+          </div>
+        </form>
+      </div>
+      
   <script>
     function onWriteSubmit()
     {
