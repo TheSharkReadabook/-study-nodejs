@@ -2,34 +2,31 @@
 <html xmlns="http://www.w3.org/1999/html">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/write.css' />
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form method="post" action="/board/write" onsubmit="onWriteSubmit()">
-      <table border="2">
-        <tr>
-          <th>제목</th>
-          <td><input type="text" name="title" id="title" required /></td>
-        </tr>
-        <tr>
-          <th>글쓴이</th>
-          <td><input type="text" name="writer" id="writer" required/></td>
-        </tr>
-        <tr>
-          <th>비밀번호</th>
-          <td><input type="password" name="password" id="password" required/></td>
-        </tr>
-        <tr>
-          <th>내용</th>
-          <td><textarea cols="50" role="12" name="content" id="content" required></textarea></td>
-        </tr>
-        <tr>
-          <td colspan="2"><input type="submit" value="등록"></td>
-        </tr>
-      </table>
-    </form>
+    <% include ../tampletes/header.ejs %>
+    <div class='form_box'>
+      <form method="post" action="/board/write" onsubmit="onWriteSubmit()">
+
+        <div>
+          <input type="text" name="title" id="title" placeholder='TITLE' required />
+        </div>       
+        <div>
+          <input type="writer" name="writer" id="wirter" placeholder='WRITER' required />
+        </div>     
+        <div>
+          <input type="password" name="password" id="password" placeholder='PASSWORD' required />
+        </div>
+        <textarea name="content" id="content" placeholder='WRITE ANYTHING!' required></textarea>
+        <div class='btn_submit_box'>
+          <input type="submit" value="submit!" class='btn_submit'>
+        </div>
+      </form>
+    </div>
+
+
   <script>
     function onWriteSubmit()
     {

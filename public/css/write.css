@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+input, textarea{
+    width: 900px;
+    height: 50px;
+    padding:5px 15px;
+}
+
+textarea{
+    height: 250px;
+}
+
+.form_box{
+    position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%, -50%);
+    margin-top:100px;
+}
+
+.btn_submit_box{
+    text-align: center;
+    margin: 50px;
+}
+
+.btn_submit{
+    width: 250px;
+    height: 50px;
+    background-color:#4287f5;
+    border: none;
+    border-radius: 20px;
+    color:#fff;
+    font-size: 20px
+}
+
+.btn_submit:hover{
+    background-color:#3f42f2;
+    transition: 0.5s;
+}
+
