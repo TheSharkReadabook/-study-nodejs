@@ -39,3 +39,15 @@ INSERT INTO `board` (`title`, `writer`, `content`,`password`) VALUES
 	('두번째 글', 'abcd02', '두번째 글 내용', '2222'),
   ('세번째 글', 'abcd03', '세번째 글 내용', '3333');
 
+
+CREATE TABLE `members`(
+  `num` INT(12) NOT NULL AUTO_INCREMENT,
+  `id` varchar(20) NOT NULL COMMENT '',
+  `password` varchar(20) NOT NULL COMMENT '',
+  `name` varchar(20) NOT NULL COMMENT '',
+  `email` varchar(20) NOT NULL COMMENT '',
+  PRIMARY KEY (`num`,`id`) COMMENT ''
+);
+
+INSERT INTO `members`(`id`,`password`,`name`,`email`) 
+VALUES ('test','test','iu','iu@iu.com');

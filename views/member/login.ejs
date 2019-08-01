@@ -1,27 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/html">
+  <head>
+    <title>welcome!</title>
+    <link rel='stylesheet' href='/css/join.css' />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  </head>
+  <body>
+    <% include ../tampletes/header.ejs %>
+    <div class='tit'>
+        <span>Hello there, Create your account!</span>
+    </div>
+    <div class='join_box'>
+      <form method="post" action="/member/login" onsubmit="onWriteSubmit()">
 
-<h3>로그인</h3>
-<form action="/member/login" method="post">
-    <table>
-        <tr>
-            <td>이메일 : </td>
-            <td><input type="text" name="userEmail"></td>
-        </tr>
-        <tr>
-            <td>비번 : </td>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="로그인"></td>
-        </tr>
-    </table>
-</form>
+        <div>
+          <input type="text" name="id" id="id" placeholder='ID' required />
+        </div>           
+        <div>
+          <input type="password" name="password" id="password" placeholder='PASSWORD' required />
+        </div>
+        <div class='btn_submit_box'>
+          <input type="submit" value="Join!" class='btn_submit'>
+        </div>
+      </form>
+    </div>
 
-</body>
+
+  <script>
+    function onWriteSubmit()
+    {
+      if ( $("#id").val().trim() == "" )
+      {
+        var message = "아이디를 입력해 주세요";
+        $("#id").val("");
+        $("#id").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#password").val().trim() == "" )
+      {
+        var message = "비밀번호를 입력해 주세요";
+        $("#password").val("");
+        $("#password").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#name").val().trim() == "" )
+      {
+        var message = "이름을 입력해 주세요";
+        $("#name").val("");
+        $("#name").focus();
+        alert(message);
+        return false;
+      }
+
+      if ( $("#email").val().trim() == "" )
+      {
+        var message = "이메일을 입력해 주세요";
+        $("#email").val("");
+        $("#email").focus();
+        alert(message);
+        return false;
+      }
+    }
+  </script>
+  </body>
 </html>
