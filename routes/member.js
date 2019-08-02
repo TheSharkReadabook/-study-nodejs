@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql'); //mysql 모듈을 로딩.
 var bodyParser = require('body-parser');
+var crypto = require('crypto');
 
 router.use(bodyParser.urlencoded({extended: false}));
 
@@ -26,10 +27,14 @@ router.post('/join', (req, res, next) => {
   var name = req.body.name;
   var email = req.body.email;
 
+var pw_cipher = crypto.createCipher('aes256','hash password');
+pw_cipher.update(password, 'ascii','hex');
+var pw_cipher = pw_cipher.final('hex');
+
   connection.beginTransaction( (err) => {
     if(err) console.log(err);
     connection.query('INSERT INTO `members`(`id`,`password`,`name`,`email`) VALUES (?,?,?,?)'
-    ,[id, password, name, email]
+    ,[id, pw_cipher, name, email]
     , (err) =>{
       if(err){
         console.log(err);
@@ -56,5 +61,38 @@ router.get('/login', function(req, res) {
   res.render('member/login');
 });
 
+
+router.post('/login', (req, res) =>{
+  
+  let body = req.body;
+  let id = req.body.id;
+  let password = req.body.password;
+
+  connection.beginTransaction( (err) => {
+    if(err) console.log(err);
+    connection.query('SELECT `password` FROM `members` WHERE `id` = ?')
+    ,[id]
+    ,(err, db_password) => {
+      if(err){
+        console.log(err);
+        connection.rollback( () => {
+          console.err('rollback error1');
+        })
+      }
+      else{
+        var pw_cipher = crypto.createCipher('aes256','hash password');
+        pw_cipher.update(password, 'ascii','hex');
+        var pw_cipher = pw_cipher.final('hex');
+
+        if(pw_cipher == db_password){
+          console.log('matched');
+        }else{
+          console.log('not matched')
+        }
+      }
+    }
+
+  }) 
+})
 
 module.exports = router;
