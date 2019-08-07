@@ -3,6 +3,7 @@ var router = express.Router();
 var mysql = require('mysql'); //mysql 모듈을 로딩.
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
+var cookie = require('cookie');
 
 router.use(bodyParser.urlencoded({extended: false}));
 
@@ -10,6 +11,20 @@ var dbconfig = require('../db_connect.js');
 var connection = mysql.createConnection(dbconfig);
 
 connection.connect();
+
+function authIsOwner(req, res){
+  var isOwner = false;
+  var cookies = {};
+  if (req.headers.cookie){
+    cookies = cookie.parse(req.headers.cookie);
+  }
+  if(cookies.password == db_password){
+    isOwner = ture;
+  }
+  return isOwner;
+}
+
+
  
 
 router.get('/', () => {
@@ -64,9 +79,9 @@ router.get('/login', function(req, res) {
 
 router.post('/login', (req, res) =>{
   
-  let body = req.body;
-  let id = req.body.id;
-  let password = req.body.password;
+  var body = req.body;
+  var id = req.body.id;
+  var password = req.body.password;
 
   connection.beginTransaction( (err) => {
     if(err) console.log(err);
@@ -80,19 +95,36 @@ router.post('/login', (req, res) =>{
         })
       }
       else{
+        var isOwner = authIsOwner(password);
+
+        console.log(isOwner);
+
         var pw_cipher = crypto.createCipher('aes256','hash password');
         pw_cipher.update(password, 'ascii','hex');
         var pw_cipher = pw_cipher.final('hex');
 
         if(pw_cipher == db_password){
-          console.log('matched');
+          console.log('account matched');
+            res.writeHead(302, {
+              'Set-Cookie':[
+                `id=${id}`,
+                `password=${password}`
+              ],
+              Location:`/`
+            })
+
         }else{
           console.log('not matched')
         }
       }
+      connection.commit( (err) => {
+        if(err) console.log(err);
+        res.redirect('/');
+      })
     }
 
   }) 
 })
+
 
 module.exports = router;

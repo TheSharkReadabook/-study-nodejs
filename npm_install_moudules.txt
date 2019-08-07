@@ -14,3 +14,9 @@ npm install passport passport-local express-session
 
 
 npm install cookie
+
+cookie-parser
+
+express-session
+
+session-file-store
