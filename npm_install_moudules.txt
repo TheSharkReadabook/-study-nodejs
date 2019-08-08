@@ -20,3 +20,8 @@ cookie-parser
 express-session
 
 session-file-store
+
+npm install jsonwebtoken --save
+
+composable-middleware
+
