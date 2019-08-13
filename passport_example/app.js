@@ -23,6 +23,15 @@ var authdata = {
   nickname: 'asd'
 }
 
+
+var index = require('./routes/index');
+
+app.use('/', index);
+
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+
+
 var passport = require('passport') //passport module add
   , LocalStrategy = require('passport-local').Strategy;
   app.use(bodyParser.urlencoded({extended:false}));
@@ -86,12 +95,11 @@ app.post('/login',
     successRedirect: '/',
     failureRedirect: '/login' }));
 
-var index = require('./routes/index');
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
-app.use('/', index);
-
-app.set('views', path.join(__dirname, 'views'));
-app.set("view engine", "ejs");
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
