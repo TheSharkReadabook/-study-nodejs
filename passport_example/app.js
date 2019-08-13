@@ -7,6 +7,8 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session)
 var bodyParser = require('body-parser');
 
+
+// if you use to req.user you have to define middleware like this order :
 // app.use(express.static('public'));
 // app.use(express.cookieParser());
 // app.use(express.bodyParser());
