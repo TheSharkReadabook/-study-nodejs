@@ -6,32 +6,16 @@ var path = require('path');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session)
 var bodyParser = require('body-parser');
-// var cors = require('cors');
 
-// app.use(cors({
-//   origin: '*'
-// }));
+// app.use(express.static('public'));
+// app.use(express.cookieParser());
+// app.use(express.bodyParser());
+// app.use(express.session({ secret: 'keyboard cat' }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(app.router);
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
 
-app.use(session({
-  secret: 'asadlfkj!@#!@#dfgasdg',
-  resave: false,
-  saveUninitialized: true,
-  store: new FileStore(),
-  cookie:{
-    secure:false
-  }
-}))
-app.use(flash());
-
-var index = require('./routes/index');
-
-app.use('/', index);
-
-app.set('views', path.join(__dirname, 'views'));
-app.set("view engine", "ejs");
 
 var authdata = {
   email:'asd@asd.asd',
@@ -39,10 +23,21 @@ var authdata = {
   nickname: 'asd'
 }
 
-
 var passport = require('passport') //passport module add
   , LocalStrategy = require('passport-local').Strategy;
-
+  app.use(bodyParser.urlencoded({extended:false}));
+  app.use(bodyParser.json());
+  
+  app.use(session({
+    secret: 'anything',
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore(),
+    cookie:{
+      secure:false
+    }
+  }))
+  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());  
 
@@ -91,6 +86,12 @@ app.post('/login',
     successRedirect: '/',
     failureRedirect: '/login' }));
 
+var index = require('./routes/index');
+
+app.use('/', index);
+
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
