@@ -23,15 +23,6 @@ var authdata = {
   nickname: 'asd'
 }
 
-
-var index = require('./routes/index');
-
-app.use('/', index);
-
-app.set('views', path.join(__dirname, 'views'));
-app.set("view engine", "ejs");
-
-
 var passport = require('passport') //passport module add
   , LocalStrategy = require('passport-local').Strategy;
   app.use(bodyParser.urlencoded({extended:false}));
@@ -94,6 +85,13 @@ app.post('/login',
   passport.authenticate('local', { 
     successRedirect: '/',
     failureRedirect: '/login' }));
+
+var index = require('./routes/index');
+
+app.use('/', index);
+
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
 
 app.get('/logout', function(req, res){
   req.logout();
