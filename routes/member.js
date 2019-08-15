@@ -12,6 +12,25 @@ var FileStore = require('session-file-store')(session)
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+var passport = require('passport') //passport module add
+  , LocalStrategy = require('passport-local').Strategy;
+
+  // fetch('/api/foo', {credentials: 'include'})
+
+  app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    // cookie: { secure: true }
+  }))
+
+  
+
+  app.use(passport.initialize());
+  app.use(passport.session());  
+  app.use(flash());
+
+
 var dbconfig = require('../db_connect.js');
 var connection = mysql.createConnection(dbconfig);
 
@@ -58,11 +77,12 @@ var pw_cipher = pw_cipher.final('hex');
 })
 
 app.post('/members', function(req,res){
- console.log(req);
+ console.log(req.user);
  res.render('members');
 });
 
 app.get('/login', function(req, res) {
+  console.log('req.user: ',req.user);
   res.render('member/login');
 });
 
@@ -72,22 +92,6 @@ var authdata = {
   nickname: 'asd'
 }
 
-var passport = require('passport') //passport module add
-  , LocalStrategy = require('passport-local').Strategy;
-
-  // fetch('/api/foo', {credentials: 'include'})
-
-  app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    // cookie: { secure: true }
-  }))
-
-  
-  app.use(flash());
-  app.use(passport.initialize());
-  app.use(passport.session());  
 
   passport.serializeUser(function(user, done) {
     console.log('serializeUser', user);

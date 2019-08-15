@@ -5,7 +5,7 @@ var app = express();
 
 
 app.get('/', (req, res) => {
-  var username = req.session.passport.user;
+  var username = 'asd@asd.asd';
   // console.log('req', req);
   // console.log('req.session', req.session);
 
