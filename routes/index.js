@@ -1,10 +1,12 @@
 var express = require('express');
-var router = express.Router();
+var app = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.render('index');
-  });
- 
+app.get('/', (req, res) => {
+  var username = req.isAuthenticated();
+  // console.log('req', req);
+  console.log('@@@username@@@', username);
+    res.render('index')
+  })
 
+module.exports = app;
 
-module.exports = router;
