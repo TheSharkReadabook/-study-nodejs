@@ -128,6 +128,27 @@ var passport = require('passport') //passport module add
     }
   ));
 
+var JwtStrategy = require('passport-jwt').Strategy,
+ExtractJwt = require('passport-jwt').ExtractJwt;
+var opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
+// opts.issuer = 'accounts.examplesoft.com';
+// opts.audience = 'yoursite.net';
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+  if(authdata.email == usernameField) {
+      console.log(1)
+          return done(false);
+      }
+      if (usernameField) {
+        console.log(2)
+          return done(null, usernameField);
+      } else {
+        console.log(3)
+          return done(null, false);
+          // or you could create a new account
+      }
+}));
 
 app.post('/login',
   passport.authenticate('local', { 
