@@ -39,9 +39,34 @@ var passport = require('passport') //passport module add
       secure:false
     }
   }))
-  app.use(flash());
+  
   app.use(passport.initialize());
   app.use(passport.session());  
+
+  app.use(flash());
+  app.get('/flash', function(req, res){
+    // Set a flash message by passing the key, followed by the value, to req.flash().
+    req.flash('msg', 'Flash is back!!')  
+    res.send('flash');
+  });
+  
+  app.get('/flash-display', function(req, res){
+    // Get an array of flash messages by passing the key to req.flash()
+    var fmsg =  req.flash();
+    console.log(fmsg);
+    res.send(fmsg);
+    // res.render('index', { messages: req.flash('info') });
+  });
+
+  
+// app.get('/login', (req, res) => {
+//   var flash_msg = req.flash().error[0];
+//   var flash_msg = req.flash().succes[0];
+//   console.log(flash_msg);
+//   res.render('login',{flash_msg});
+// })
+
+
 
   passport.serializeUser(function(user, done) {
     console.log('serializeUser', user);
@@ -86,7 +111,10 @@ var passport = require('passport') //passport module add
 app.post('/login',
   passport.authenticate('local', { 
     successRedirect: '/',
-    failureRedirect: '/login' }));
+    failureRedirect: '/login',
+    failureFlash: true,
+    successFlash: true
+    }));
 
 var index = require('./routes/index');
 

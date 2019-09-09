@@ -3,6 +3,13 @@ npm install express --save
 npm install sanitize-html --save
 npm install ejs --save
 npm install body-parser --save
+npm install cookie -s
+npm install cookie-parser -s 
+npm install express-session -s 
+npm install session-file-store -s 
+npm install jsonwebtoken --save
+npm install composable-middleware -s 
+
 
 npm install mysql -g
 npm install express -g
@@ -15,13 +22,6 @@ npm install passport passport-local express-session
 
 npm install cookie
 
-cookie-parser
 
-express-session
 
-session-file-store
-
-npm install jsonwebtoken --save
-
-composable-middleware
 
