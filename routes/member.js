@@ -141,14 +141,14 @@ opts.secretOrKey = 'secret';
 // opts.audience = 'yoursite.net';
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
   if(authdata.email == usernameField) {
-      console.log(1)
+      console.log('passport-jwt'+1)
           return done(false);
       }
       if (usernameField) {
-        console.log(2)
+        console.log('passport-jwt'+2)
           return done(null, usernameField);
       } else {
-        console.log(3)
+        console.log('passport-jwt'+3)
           return done(null, false);
           // or you could create a new account
       }
